@@ -29,7 +29,7 @@ def turn():  # function that checks whose turn it is and where they can place th
     while True:
         next_move_x = int(input(
             f"Player {1 if player1 else 2}, please choose the x (horizontal) coordinates of your next move: "))
-        if next_move_x in list(range(3)):  # TODO Implement check to see if move is legal
+        if next_move_x in list(range(3)):
             break
         else:
             print("Please be sure to input a valid number (0-2). \nPlease try Again.")
@@ -37,7 +37,7 @@ def turn():  # function that checks whose turn it is and where they can place th
     while True:
         next_move_y = int(input(
             f"Player {1 if player1 else 2}, please choose the y (vertical)   coordinates of your next move: "))
-        if next_move_y in list(range(3)):  # TODO Implement check to see if move is legal
+        if next_move_y in list(range(3)):
             break
         else:
             print("Please be sure to input a valid number (0-2). \nPlease try Again.")
@@ -47,13 +47,21 @@ def turn():  # function that checks whose turn it is and where they can place th
     return check_move(next_move_x, next_move_y)
 
 
+def check_win():
+    # a
+    for j in range(0, len(field)):
+        for k in range(0, len(field)):
+            if j == k:
+                return True
+
+
 def do_move(x, y):
     global player1  # Tells do_move to look for the global var player1
     field[y][x] = (player1_char if player1 else player2_char)
     printer()
-    # TODO implement win checker here
-    player1 = not player1
-    turn()
+    if not check_win():  # TODO implement win checker here
+        player1 = not player1
+        turn()
 
 
 def check_move(x, y):
