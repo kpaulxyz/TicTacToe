@@ -49,19 +49,28 @@ def turn():  # function that checks whose turn it is and where they can place th
 
 def check_win():
     # a
-    for j in range(0, len(field)):
-        for k in range(0, len(field)):
-            if j == k:
-                return True
+    for j in range(0, len(field), 2):
+        if field[j][0] == field[j][2] == field[j][4] == (player1_char if player1 else player2_char):
+            return True
+        elif field[0][j] == field[2][j] == field[4][j] == (player1_char if player1 else player2_char):
+            return True
+    if field[0][0] == field[2][2] == field[4][4] == (player1_char if player1 else player2_char):
+        return True
+    elif field[0][4] == field[2][2] == field[4][0] == (player1_char if player1 else player2_char):
+        return True
+    else:
+        return False
 
 
 def do_move(x, y):
     global player1  # Tells do_move to look for the global var player1
     field[y][x] = (player1_char if player1 else player2_char)
     printer()
-    if not check_win():  # TODO implement win checker here
+    if not check_win():
         player1 = not player1
         turn()
+    else:
+        print(f"Player {1 if player1 else 2} won")
 
 
 def check_move(x, y):
