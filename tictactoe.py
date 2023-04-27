@@ -64,15 +64,6 @@ def check_win():
         return True
     elif field[0][4] == field[2][2] == field[4][0] == (player1_char if player1 else player2_char):
         return True
-    '''elif:
-
-        for j in range(0, len(field)):
-            for k in range(0, len(field)):
-                if field[j][k] != " ":
-                    draw = True'''
-    # elif field[j for j in range(0, len(field), 2)][k for k in range(0, len(field), 2)] != " ":
-    # elif all(all(j) for j in field[k][j]):
-    # elif field[all(j for j in range(0, len(field), 2))][all(k for k in range(0, len(field), 2))] != " ":
     if all(field[j][k] != " " for j in range(len(field)) for k in range(len(field))):
         # code to execute if all elements are not equal to " "
         draw = True
@@ -80,7 +71,6 @@ def check_win():
 
     else:
         return False
-        # if all(all(x != " " ) for x in range(x, len()field), 2)
 
 
 def do_move(x, y):
@@ -94,9 +84,8 @@ def do_move(x, y):
         f.close()
         player1 = not player1
         turn()
-    #else:
     elif check_win():
-        if draw == True:
+        if draw:
             print("Its a draw.")
         else:
             print(f"Player {1 if player1 else 2} won")
