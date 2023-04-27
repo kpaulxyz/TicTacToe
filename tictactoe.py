@@ -1,6 +1,9 @@
 # first two player tictactoe then one player against ai
 # Ich hab jetzt einfach mal ohne OOP(bzw MVC/MVP) angefangen.
 # Ich denke es ist einfacher es erst so zu machen und dann einzuteilen.
+import os.path
+if os.path.isfile('./savestate.py'):
+    from savestate import save
 
 
 field = [[" ", "|", " ", "|", " "],
@@ -67,10 +70,15 @@ def do_move(x, y):
     field[y][x] = (player1_char if player1 else player2_char)
     printer()
     if not check_win():
+        f = open("savestate.py", "w")
+        f.write("save = " + repr(field))
+        f.close()
         player1 = not player1
         turn()
     else:
         print(f"Player {1 if player1 else 2} won")
+        if os.path.exists("savestate.py"):
+            os.remove("savestate.py")
 
 
 def check_move(x, y):
@@ -85,6 +93,20 @@ def check_move(x, y):
 
 
 print("Willkommen zu Kat&Paul's TicTacToe:")
+
+if os.path.isfile('./savestate.py'):
+    inp = None
+    while inp != ("y" or "n"):
+        inp = input("An older savestate has been found. Do you want to continue it? (y/n): ")
+    if inp == "y":
+        field = save
+        '''try:
+            field = save
+        except SyntaxError:
+            pass'''
+
+
+
 printer()
 print("Player 1 (X) will start playing.")
 turn()
