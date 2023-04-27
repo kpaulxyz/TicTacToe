@@ -2,9 +2,9 @@
 # Ich hab jetzt einfach mal ohne OOP(bzw MVC/MVP) angefangen.
 # Ich denke es ist einfacher es erst so zu machen und dann einzuteilen.
 import os.path
+
 if os.path.isfile('./savestate.py'):
     from savestate import save
-
 
 field = [[" ", "|", " ", "|", " "],
          ["—", "+", "—", "+", "—"],
@@ -15,6 +15,7 @@ field = [[" ", "|", " ", "|", " "],
 player1 = True  # bool that states which player is currently playing
 player1_char = "X"
 player2_char = "O"
+draw = False
 
 
 def printer():  # function that prints the field
@@ -31,7 +32,8 @@ def turn():  # function that checks whose turn it is and where they can place th
 
     while True:
         next_move_x = int(input(
-            f"Player {1 if player1 else 2}, please choose the x (horizontal) coordinates of your next move: "))
+            f"Player {1 if player1 else 2} ({player1_char if player1 else player2_char}), please choose the x ("
+            f"horizontal) coordinates of your next move: "))
         if next_move_x in list(range(3)):
             break
         else:
@@ -39,7 +41,8 @@ def turn():  # function that checks whose turn it is and where they can place th
 
     while True:
         next_move_y = int(input(
-            f"Player {1 if player1 else 2}, please choose the y (vertical)   coordinates of your next move: "))
+            f"Player {1 if player1 else 2} ({player1_char if player1 else player2_char}), please choose the y ("
+            f"vertical)   coordinates of your next move: "))
         if next_move_y in list(range(3)):
             break
         else:
@@ -51,7 +54,7 @@ def turn():  # function that checks whose turn it is and where they can place th
 
 
 def check_win():
-    # a
+    global draw
     for j in range(0, len(field), 2):
         if field[j][0] == field[j][2] == field[j][4] == (player1_char if player1 else player2_char):
             return True
@@ -61,12 +64,28 @@ def check_win():
         return True
     elif field[0][4] == field[2][2] == field[4][0] == (player1_char if player1 else player2_char):
         return True
+    '''elif:
+
+        for j in range(0, len(field)):
+            for k in range(0, len(field)):
+                if field[j][k] != " ":
+                    draw = True'''
+    # elif field[j for j in range(0, len(field), 2)][k for k in range(0, len(field), 2)] != " ":
+    # elif all(all(j) for j in field[k][j]):
+    # elif field[all(j for j in range(0, len(field), 2))][all(k for k in range(0, len(field), 2))] != " ":
+    if all(field[j][k] != " " for j in range(len(field)) for k in range(len(field))):
+        # code to execute if all elements are not equal to " "
+        draw = True
+        return True
+
     else:
         return False
+        # if all(all(x != " " ) for x in range(x, len()field), 2)
 
 
 def do_move(x, y):
     global player1  # Tells do_move to look for the global var player1
+    global draw
     field[y][x] = (player1_char if player1 else player2_char)
     printer()
     if not check_win():
@@ -75,8 +94,12 @@ def do_move(x, y):
         f.close()
         player1 = not player1
         turn()
-    else:
-        print(f"Player {1 if player1 else 2} won")
+    #else:
+    elif check_win():
+        if draw == True:
+            print("Its a draw.")
+        else:
+            print(f"Player {1 if player1 else 2} won")
         if os.path.exists("savestate.py"):
             os.remove("savestate.py")
 
@@ -92,20 +115,20 @@ def check_move(x, y):
         do_move(x, y)
 
 
-print("Willkommen zu Kat&Paul's TicTacToe:")
+print("Welcome to Kat&Paul's TicTacToe:")
 
 if os.path.isfile('./savestate.py'):
-    inp = None
-    while inp != ("y" or "n"):
-        inp = input("An older savestate has been found. Do you want to continue it? (y/n): ")
-    if inp == "y":
-        field = save
-        '''try:
+    inp = input("An older savestate has been found. Do you want to continue it? (y/n): ")
+
+    while True:
+        if inp == "n":
+            break
+
+        if inp == "y":
             field = save
-        except SyntaxError:
-            pass'''
+            break
 
-
+        inp = input("That was not a valid input. Type y/n if you want to continue or not: ")
 
 printer()
 print("Player 1 (X) will start playing.")
