@@ -115,10 +115,19 @@ if os.path.isfile('./savestate.py'):
 
         if inp == "y":
             field = save
+            spacecount = 0
+            for j in range(0, len(field)):
+                for k in range(0, len(field)):
+                    if field[j][k] == " ":
+                        spacecount += 1
+            # (player1 = True) if spacecount % 2 == 1 else (player1 = False)
+            if spacecount % 2 == 0:
+                player1 = False
+
             break
 
         inp = input("That was not a valid input. Type y/n if you want to continue or not: ")
 
 printer()
-print("Player 1 (X) will start playing.")
+print(f"Player {1 if player1 else 2} ({player1_char if player1 else player2_char}) will start playing.")
 turn()
