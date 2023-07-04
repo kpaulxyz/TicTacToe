@@ -23,6 +23,23 @@ class TestMinimax(unittest.TestCase):
         self.assertEqual(x, expected_x)  # Check if the x-coordinate of the best move matches the expected value
         self.assertEqual(y, expected_y)  # Check if the y-coordinate of the best move matches the expected value
 
+        current_field = [["X", "|", "O", "|", "X"],
+                         ["—", "+", "—", "+", "—"],
+                         [" ", "|", "O", "|", ""],
+                         ["—", "+", "—", "+", "—"],
+                         ["O", "|", " ", "|", "X"]]  # Set the current field state
+        player1_char = 'X'
+        player2_char = 'O'
+
+        score, x, y = self.minimax.minimax(current_field, True, "X", "O")  # Call the minimax method
+        expected_score = 1  # Adjust the expected score based on the game rules and the field state
+        expected_x = 2  # Adjust the expected x-coordinate of the best move
+        expected_y = 4  # Adjust the expected y-coordinate of the best move
+
+        self.assertEqual(score, expected_score)  # Check if the score matches the expected value
+        self.assertEqual(x, expected_x)  # Check if the x-coordinate of the best move matches the expected value
+        self.assertEqual(y, expected_y)  # Check if the y-coordinate of the best move matches the expected value
+
     def test_check_win(self) -> None:
         player1_char = 'X'
         player2_char = 'O'

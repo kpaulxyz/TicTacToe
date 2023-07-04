@@ -11,6 +11,3 @@ class Playerhandler:
         self.player1_char = "X"
         self.player2_char = "O"
         self.ai = False
-    '''
-    def getPlayer(self):
-        return'''

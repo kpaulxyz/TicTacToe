@@ -28,20 +28,17 @@ class Tictactoe:
             self.model.do_move(best_move[1] // 2, best_move[2] // 2, self.playerhandler.player1,
                                self.playerhandler.player1_char,
                                self.playerhandler.player2_char)
-            # self.printer.printfield(self.model.field)
 
         else:
             while True:
                 nextmove = self.printer.playermove(self.playerhandler.player1, self.playerhandler.player1_char,
                                                    self.playerhandler.player2_char)
                 next_move_x, next_move_y = nextmove
-                # return self.model.check_move(next_move_x, next_move_y, True)
 
                 if self.model.check_move(next_move_x, next_move_y, True):
                     self.model.do_move(next_move_x, next_move_y, self.playerhandler.player1,
                                        self.playerhandler.player1_char, self.playerhandler.player2_char)
                     break
-                    # self.playerhandler.player1 = not self.playerhandler.player1
                 else:
                     self.printer.occupied()
                     self.printer.printfield(self.model.field)
@@ -60,10 +57,8 @@ class Tictactoe:
         self.printer.printfield(self.model.field)
         self.printer.endmessage(win[0], win[1], self.playerhandler.ai)
         exit()
-        # self.turn()
 
     def check_win(self, ifield, player1_char, player2_char):
-        # nothing 0, 0; draw 1, 1; win player1 1, 0; win player2 0, 1
         for j in range(0, len(ifield), 2):
             if ifield[j][0] == ifield[j][2] == ifield[j][4] == player1_char:
                 return 1, 0
@@ -87,7 +82,6 @@ class Tictactoe:
         else:
             return 0, 0
 
-    # verbose = True
 
     def main(self):
         inp = None
@@ -99,7 +93,7 @@ class Tictactoe:
                     break
 
                 if inp == "y":
-                    self.model.loadsavestate()  # self.tictactoe.checksavestateplayer()
+                    self.model.loadsavestate()
                     spacecount = 0
                     for j in range(0, len(self.model.field)):
                         for k in range(0, len(self.model.field)):
@@ -108,11 +102,8 @@ class Tictactoe:
                     if spacecount % 2 == 0:
                         self.playerhandler.player1 = False
                     break
-        # self.printer.checkai()
 
-        # inp = self.printer.invalidsavestate()
 
-        # inp = self.printer.checkai()
         while True:
             checkai = self.printer.checkai()
             if checkai == 1:
@@ -123,9 +114,7 @@ class Tictactoe:
             elif checkai == 3:
                 self.printer.invalidai()
 
-            # checkai = self.printer.invalidai()
 
-        # printer.printfield(self.model.field)
         self.printer.startsplaying(self.playerhandler.player1, self.playerhandler.player1_char,
                                    self.playerhandler.player2_char)
         self.turn()

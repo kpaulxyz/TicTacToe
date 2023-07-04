@@ -64,8 +64,6 @@ class Printer:
 
     def invalidai(self):
         print("That was not a valid input. Please try again. ")
-        # return 0
-        # return input("That was not a valid input. Type 1/2 if you want to play against AI or local multiplayer: ")
 
     def startsplaying(self, player1, player1_char, player2_char):
         print(f"Player {1 if player1 else 2} ({player1_char if player1 else player2_char}) will start playing.")

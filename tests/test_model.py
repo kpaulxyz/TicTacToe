@@ -95,3 +95,8 @@ class TestModel(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    f = open("savestate.py", "r")  # Read the content of the savestate file
+    f.write("save = [['X', '|', ' ', '|', ' '], "
+            "['—', '+', '—', '+', '—'], [' ', '|', ' ', '|', ' '], "
+            "['—', '+', '—', '+', '—'], [' ', '|', ' ', '|', ' ']]")
+    f.close()
