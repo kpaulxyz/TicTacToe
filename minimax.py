@@ -30,21 +30,13 @@ class Minimax:
                         best_score = score
                         best_move = j, k
 
-        '''if best_score == 0 and best_move == (0, 0):  # is None:
-            empty_cells = [(j, k) for j in range(0, len(current_field), 2) for k in range(0, len(current_field), 2) if
-                           current_field[j][k] == " "]
-            random.seed()
-            random_move = random.choice(empty_cells)
-            return 0, random_move[0], random_move[1]'''
         # else:
         if best_move is None:
             return 0, -1, -1  # No available moves
         else:
-            # print('The next best move is:', best_move, "score: ", best_score)
             return best_score, best_move[1], best_move[0]
 
     def check_win(self, ifield, player1_char, player2_char):
-        # nothing 0, 0; draw 1, 1; win player1 1, 0; win player2 0, 1
         for j in range(0, len(ifield), 2):
             if ifield[j][0] == ifield[j][2] == ifield[j][4] == player1_char:
                 return 1, 0

@@ -15,16 +15,7 @@ class Model:
 
     def do_move(self, x, y, player1, player1_char, player2_char):
         self.field[y*2][x*2] = (player1_char if player1 else player2_char)
-        # printer()
-        # win = check_win(field)
-        # if win == (0, 0):
-        # savetosavestate
-        """player1 = not player1
-        turn() controller"""
-        '''elif win == (1, 1):
-        elif win == (1, 0):
-        elif win == (0, 1):
-            '''
+
 
     def loadsavestate(self):
         if os.path.isfile('./savestate.py'):
@@ -51,9 +42,7 @@ class Model:
         y = int(y * 2)
         if not self.field[y][x] == " ":
             if verbose:
-                # self.printer.occupied()
                 return False
         else:
             return True
-        # else:
-        #    do_move(x, y)
+
