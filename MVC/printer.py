@@ -21,11 +21,7 @@ class Printer:
 
     def playermove(self, player1, player1_char, player2_char):
         while True:
-
-
-            next_move_x = int(input(
-                f"Player {1 if player1 else 2} ({player1_char if player1 else player2_char}), please choose the x ("
-                f"horizontal) coordinates of your next move: "))
+            next_move_x = int(input(f"Player {1 if player1 else 2} ({player1_char if player1 else player2_char}), please choose the x (horizontal) coordinates of your next move: "))
             if next_move_x in list(range(3)):
                 break
             else:
@@ -66,7 +62,9 @@ class Printer:
             return 3
 
     def invalidai(self):
-        return input("That was not a valid input. Type 1/2 if you want to play against AI or local multiplayer: ")
+        print("That was not a valid input. Please try again. ")
+        # return 0
+        # return input("That was not a valid input. Type 1/2 if you want to play against AI or local multiplayer: ")
 
     def startsplaying(self, player1, player1_char, player2_char):
         print(f"Player {1 if player1 else 2} ({player1_char if player1 else player2_char}) will start playing.")

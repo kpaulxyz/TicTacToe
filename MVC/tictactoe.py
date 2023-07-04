@@ -11,6 +11,7 @@ class Tictactoe:
     playerhandler = None
     minimax = None
     model = None
+
     def __init__(self):
         self.printer = printer.Printer()
         self.playerhandler = playerhandler.Playerhandler()
@@ -21,12 +22,13 @@ class Tictactoe:
         self.printer.printfield(self.model.field)
         if self.playerhandler.ai and not self.playerhandler.player1:
             self.printer.aicalc()
-            best_move = self.minimax.minimax(self.model.field, not self.playerhandler.player1, self.playerhandler.player1_char, self.playerhandler.player2_char)
+            best_move = self.minimax.minimax(self.model.field, not self.playerhandler.player1,
+                                             self.playerhandler.player1_char, self.playerhandler.player2_char)
             self.printer.aimoved(best_move)
-            self.model.do_move(best_move[1]//2, best_move[2]//2, self.playerhandler.player1, self.playerhandler.player1_char,
+            self.model.do_move(best_move[1] // 2, best_move[2] // 2, self.playerhandler.player1,
+                               self.playerhandler.player1_char,
                                self.playerhandler.player2_char)
             # self.printer.printfield(self.model.field)
-
 
         else:
             while True:
@@ -36,7 +38,8 @@ class Tictactoe:
                 # return self.model.check_move(next_move_x, next_move_y, True)
 
                 if self.model.check_move(next_move_x, next_move_y, True):
-                    self.model.do_move(next_move_x, next_move_y, self.playerhandler.player1, self.playerhandler.player1_char, self.playerhandler.player2_char)
+                    self.model.do_move(next_move_x, next_move_y, self.playerhandler.player1,
+                                       self.playerhandler.player1_char, self.playerhandler.player2_char)
                     break
                     # self.playerhandler.player1 = not self.playerhandler.player1
                 else:
@@ -54,9 +57,10 @@ class Tictactoe:
             self.model.deletesavestate()
         elif win == (0, 1):
             self.model.deletesavestate()
+        self.printer.printfield(self.model.field)
         self.printer.endmessage(win[0], win[1], self.playerhandler.ai)
-        self.turn()
-
+        exit()
+        # self.turn()
 
     def check_win(self, ifield, player1_char, player2_char):
         # nothing 0, 0; draw 1, 1; win player1 1, 0; win player2 0, 1
@@ -95,7 +99,7 @@ class Tictactoe:
                     break
 
                 if inp == "y":
-                    self.model.loadsavestate()# self.tictactoe.checksavestateplayer()
+                    self.model.loadsavestate()  # self.tictactoe.checksavestateplayer()
                     spacecount = 0
                     for j in range(0, len(self.model.field)):
                         for k in range(0, len(self.model.field)):
@@ -105,7 +109,6 @@ class Tictactoe:
                         self.playerhandler.player1 = False
                     break
         # self.printer.checkai()
-
 
         # inp = self.printer.invalidsavestate()
 
@@ -119,6 +122,8 @@ class Tictactoe:
                 break
             elif checkai == 3:
                 self.printer.invalidai()
+
+            # checkai = self.printer.invalidai()
 
         # printer.printfield(self.model.field)
         self.printer.startsplaying(self.playerhandler.player1, self.playerhandler.player1_char,
